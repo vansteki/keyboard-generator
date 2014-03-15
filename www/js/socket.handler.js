@@ -1,5 +1,5 @@
 var per = 0
-var hostname = "192.168.1.199:500"
+var hostname = "localhost:500"
 
 var socket = io.connect("http://" + hostname, {
 	"force new connection": true
@@ -7,7 +7,7 @@ var socket = io.connect("http://" + hostname, {
 
 socket.on("connect", function () {
 	console.log("Connected to server!")
-	//定時請求在線使用者與百分比
+	// request amount of user and percentage each 0.1s
 	setInterval(function() {
 		socket.emit("visitor", {})
 		socket.emit("sync_percent", { per: per })
@@ -29,6 +29,7 @@ socket.on("congraz", function (data) {
 })
 
 socket.on("disconnect", function () {
+	$("#people").text("伺服器維護中")
 	console.log("Lost connection!")
 })
 

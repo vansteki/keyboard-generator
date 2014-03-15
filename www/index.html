@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>鍵盤發電</title>
+		<title>鍵盤發電機</title>
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
 		<link href="/css/main.css" rel="stylesheet">
@@ -43,7 +43,7 @@
 		var hold = false
 
 		$("#bulb").click(function() {
-			socket.emit("desc_percent", {})
+			socket.emit("incr_percent", {})
 			syncPercent()
 		})
 
@@ -53,7 +53,7 @@
 			}
 			else if(e.which == 39 && hold == true) {
 				hold = false
-				socket.emit("desc_percent", {})
+				socket.emit("incr_percent", {})
 			}
 			syncPercent()
 		})

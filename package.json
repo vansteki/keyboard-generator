@@ -1,7 +1,7 @@
 {
 	"name": "keyboard-generator",
-	"version": "0.0.1b",
-	"description": "鍵盤發電",
+	"version": "0.1",
+	"description": "鍵盤發電機",
 	"main": "app.js",
 	"scripts": {
 		"start": "node app.js"
