@@ -1,53 +1,71 @@
-#people {
-	font-size: 80px;
-	line-height: 90px;
-	text-align: center;
+.message {
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 #main {
-	width: 297px;
-	height: 298px;
-	text-align: center;
-}
-
-td {
-	vertical-align: top;
+  width: 297px;
+  height: 298px;
+  text-align: center;
 }
 
 #mask {
-	width: 297px;
-	height: 0px; /* 298px */
-	background-color: yellow;
+  width: 297px;
+  margin: 0 auto;
+  background-color: yellow;
+  z-index: -1;
 }
 
 #per {
-	font-size: 22px;
-	line-height: 30px;
-	position: fixed;
-	left: 48%;
-	top: 22%;
+  font-size: 22px;
+  line-height: 30px;
+  position: fixed;
+  left: 48%;
+  top: 26%;
 }
 
 #bulb {
-	width: 297px;
-	height: 298px;
-	cursor: pointer;
-	background: url(http://i.imgur.com/PBxXKjw.png);
+  width: 297px;
+  height: 298px;
+  cursor: pointer;
+  background: url(../bulb.png);
+  background-size: cover;
+  transform: scaleY(-1);
+  z-index: 1;
 }
 
 #prize {
-	display: none;
-	background: url(http://i.imgur.com/RV2eFAV.jpg?1) no-repeat;
-	width: 1184px;
-	height: 759px;
-	position: absolute;
-	margin-top: -379px;
-	margin-left: -592px;
-	left: 50%;
-	top: 50%;
-	z-index: 99;
+  display: none;
+  background: url(http://i.imgur.com/RV2eFAV.jpg?1) no-repeat;
+  width: 1184px;
+  height: 759px;
+  position: absolute;
+  margin-top: -379px;
+  margin-left: -592px;
+  left: 50%;
+  top: 50%;
+  z-index: 99;
 }
 
 #sound {
-	display: none;
+  display: none;
+}
+
+.block-center {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: -1;
+}
+
+.block-center:before {
+  content: ' ';
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
 }

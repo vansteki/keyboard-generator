@@ -1,58 +1,53 @@
-var express = require("express"),
-	app = express(),
-	http = require("http"),
-	server = http.createServer(app),
-	fs = require("fs"),
-	__dirname = "www",
-	io = require("socket.io").listen(server, {
-		log: false
-	}),
-	port = 500
+var express = require('express'),
+  app = express(),
+  http = require('http').createServer(app)
+
+app.use(express.static(__dirname + '/www'))
+
+http.listen(8000)
+
+var online_user = [],
+  per = 0
 
 // decrease the percentage of bulb permanently
-var per = 0
 setInterval(function() {
-	per -= 1
-	if(per < 1)per = 0
+  per = per < 1 ? 0 : per - 1
 }, 100)
 
-var online_user = []
-
-server.listen(port, function () {
-	console.log("Server listen port "+port+"...")
+var io = require('socket.io').listen(http, {
+    log: false
 })
 
-app.use(express.static(__dirname))
+io.sockets.on('connection', function (socket) {
+  online_user.push(socket.id)
+  //get user out of array when offline
+  socket.on('disconnect', function () {
+    for(var i=0;i<online_user.length;i++) {
+      if(online_user[i] == socket.id)online_user.splice(i, 1)
+    }
+  })
 
-io.sockets.on("connection", function (socket) {
-	online_user.push(socket.id)
-	//get user out of array when offline
-	socket.on('disconnect', function () {
-		for(var i=0;i<online_user.length;i++) {
-			if(online_user[i] == socket.id)online_user.splice(i, 1)
-		}
-	})
+  //how many user online
+  socket.on('sync_visitor', function (data) {
+    socket.emit('sync_visitor', { visitor: online_user.length })
+  })
 
-	//how many user online
-	socket.on("visitor", function (data) {
-		socket.emit("visitor", { visitor: online_user.length })
-	})
+  //sync the percentage
+  socket.on('sync_percent', function (data) {
+    socket.emit('sync_percent', { per: per })
+    var temp = 0
+    if(Math.floor(per/10) > temp || Math.floor(per/10) < temp) {
+      temp = Math.floor(per/10)
+    }
+  })
 
-	//sync the percentage
-	socket.on("sync_percent", function (data) {
-		socket.emit("sync_percent", { per: per })
-		var temp = 0
-		if(Math.floor(per/10) > temp || Math.floor(per/10) < temp) {
-			temp = Math.floor(per/10)
-		}
-	})
-
-	//user generate power
-	socket.on("incr_percent", function (data) {
-		per += 3
-		if(per > 100) {
-			per = 100
-			socket.emit("congraz", {})
-		}
-	})
+  //user generate power
+  socket.on('incr_percent', function (data) {
+    console.log(per)
+    per += 3
+    if(per > 100) {
+      per = 100
+      socket.emit('congraz', {})
+    }
+  })
 })
