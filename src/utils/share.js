@@ -1,4 +1,4 @@
-export const hostname = `${location.hostname}:8000`
+export const hostname = `${location.hostname}${__DEVELOPMENT__ ? `:8000` : ``}`
 
 export const maintaining = () => {
   $("#people").text("發電機維護中")

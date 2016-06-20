@@ -30,5 +30,11 @@ module.exports = {
                 loaders: ["babel"]
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': '"production"',
+            __DEVELOPMENT__: JSON.stringify(JSON.parse(process.env.NODE_ENV === 'development'))
+        })
+    ]
 }

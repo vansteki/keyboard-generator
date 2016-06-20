@@ -2,7 +2,7 @@ import _ from 'lodash';
 import http from 'server.http';
 import socket from 'server.socket';
 
-http.listen(8000);
+http.listen(process.env.PORT || 8000);
 
 let per = 0;
 let users = [];
