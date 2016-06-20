@@ -13,10 +13,9 @@ setInterval(() => {
 
 export const addPer = amt => {
   if (per + amt > 100) {
-    per = 100;
     socket.emit('congraz')
   }
-  else per += amt;
+  per += amt;
 };
 
 export const getPer = () => per;

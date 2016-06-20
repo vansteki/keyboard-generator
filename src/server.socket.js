@@ -27,3 +27,5 @@ io.on('connection', socket => {
   //user generate power
   socket.on('incr_percent', data => addPer(3))
 });
+
+export default io;
