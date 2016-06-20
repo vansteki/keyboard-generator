@@ -3,7 +3,7 @@
 
 有聽過腳踏車發電，沒聽過鍵盤也能發電吧？
 
-![](http://www.giphy.com/gifs/l46Cm2w1aLH8rWHG8)
+![](http://i.giphy.com/l46Cm2w1aLH8rWHG8.gif)
 
 專案起源
 ---
