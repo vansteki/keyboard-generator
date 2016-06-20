@@ -6,6 +6,8 @@ import {
   displayResult
 } from "utils/share";
 
+import io from 'socket.io-client';
+
 const socket = io.connect("http://" + hostname, {
   "force new connection": true
 });
